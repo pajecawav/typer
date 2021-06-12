@@ -42,19 +42,21 @@ export const Typer = () => {
             const key = event.key;
             const currentLetter = textData?.text[currentIndex];
 
-            if (key === currentLetter) {
-                setCurrentIndex(currentIndex + 1);
+            if (stats.state !== "done") {
+                if (key === currentLetter) {
+                    setCurrentIndex(currentIndex + 1);
 
-                dispatchStatsEvent({
-                    type: "next_letter",
-                    isNextWord: key === " ",
-                });
+                    dispatchStatsEvent({
+                        type: "next_letter",
+                        isNextWord: key === " ",
+                    });
 
-                if (currentIndex + 1 >= textData?.text.length) {
-                    dispatchStatsEvent({ type: "stop" });
+                    if (currentIndex + 1 >= textData?.text.length) {
+                        dispatchStatsEvent({ type: "stop" });
+                    }
+                } else {
+                    dispatchStatsEvent({ type: "incorrect_letter" });
                 }
-            } else {
-                dispatchStatsEvent({ type: "incorrect_letter" });
             }
 
             if (key === "Enter") {
@@ -62,7 +64,7 @@ export const Typer = () => {
                 startNewTest();
             }
         },
-        [textData, currentIndex, startNewTest]
+        [textData, currentIndex, startNewTest, stats.state]
     );
 
     useEffect(() => {
