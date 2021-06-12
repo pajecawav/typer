@@ -4,7 +4,7 @@ import {
     typerStatsInitialState,
     typerStatsReducer,
 } from "../reducers/typerStatsReducer";
-import { countWords } from "../utils";
+import { classnames, countWords } from "../utils";
 import { Letter, LetterState } from "./Letter";
 import { ResultBlock } from "./ResultBlock";
 
@@ -108,11 +108,25 @@ export const Typer = () => {
                 <ResultBlock wpm={wpm} accuracy={accuracy} />
             ) : (
                 <div className="flex flex-col gap-8">
-                    <div className="text-center text-8xl text-primary-500">
+                    <div
+                        className={classnames(
+                            "text-center text-8xl text-primary-500",
+                            stats.state === "waiting"
+                                ? "opacity-0"
+                                : "animate-appear-fast"
+                        )}
+                    >
                         {stats.typedWords}/{textData.wordsCount}
                     </div>
                     <div className="font-mono">{renderedLetters}</div>
-                    <div className="text-center text-8xl text-primary-500">
+                    <div
+                        className={classnames(
+                            "text-center text-8xl text-primary-500",
+                            stats.state === "waiting"
+                                ? "opacity-0"
+                                : "animate-appear-fast"
+                        )}
+                    >
                         {wpm} {accuracy}%
                     </div>
                 </div>

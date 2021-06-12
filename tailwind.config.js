@@ -22,6 +22,7 @@ module.exports = {
             },
             animation: {
                 appear: "appear 0.3s linear",
+                "appear-fast": "appear 0.1s linear",
             },
             keyframes: {
                 appear: {
