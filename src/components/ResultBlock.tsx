@@ -5,7 +5,7 @@ type ResultBlockProps = {
 
 export const ResultBlock = ({ wpm, accuracy }: ResultBlockProps) => {
     return (
-        <div className="flex flex-col gap-4 text-center">
+        <div className="flex flex-col gap-4 text-center animate-appear">
             <div className="text-8xl text-primary-500">
                 wpm: <span className="text-secondary">{wpm}</span>
             </div>
